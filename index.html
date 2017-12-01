@@ -78,9 +78,9 @@
         var currentContact;
         var tab = $('table tbody td');
         var j = 0;
-        i=liste.iterator();
-        while(i.hasNext() != ""){
-            var currentContact = i.next();
+        var i=liste.iterator();
+        while(i.hasNext()){
+            currentContact = i.next();
             assert.equal(currentContact.firstName(),tab[j].innerHTML);
             j = j + 1;
             assert.equal(currentContact.lastName(),tab[j].innerHTML);
@@ -110,24 +110,45 @@
       });
 
       QUnit.test("remove contact tests", function (assert) {
-          var liste = Contact.Contacts.instance();
-          var currentContact;
           var tab = $('table tbody td a');
           tab[0].click();
-          var j = 0;
-          var nbContact = 0;
-          i=liste.iterator();
+          var listeR = Contact.Contacts.instance().iterator().next();
 
-          while(i.hasNext() != ""){
-              var currentContact = i.next();
-            nbContact = nbContact +1;
-          }
+          var removeContact = $('table tbody td ');
 
-          assert.equal(nbContact, 3);
+          assert.equal(listeR.firstName(),"Jacques");
+          assert.equal(listeR.firstName(),removeContact[0].innerText);
       });
 
       QUnit.test("sort contact tests", function (assert) {
-        assert.ok(false);
+          var listeContact = Contact.Contacts.instance();
+          var listeTempo = [];
+          var i=listeContact.iterator();
+
+          var buton = $('#button_sort');
+          buton[0].click();
+          var cpt = 0;
+
+          var tableau = $('table tbody td');
+
+          while(i.hasNext()){
+              listeContact = i.next();
+              listeTempo[cpt] = listeContact.lastName();
+              cpt = cpt +1;
+          }
+
+          listeTempo.sort();
+
+          console.log(listeTempo);
+          console.log(tableau);
+          var j = 1;
+
+          for(var x=0; x < listeTempo.length; x++){
+              assert.equal(listeTempo[x], tableau[j].innerText);
+              j= j+6 ;
+          }
+
+
       });
     </script>
     <!-- END - Les tests -->
