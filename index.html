@@ -89,7 +89,24 @@
       });
 
       QUnit.test("first entry tests", function (assert) {
-        assert.ok(false);
+          var liste = Contact.Contacts.instance();
+          var currentContact;
+          var j = 0;
+          j=liste.iterator();
+          var currentContact = j.next();
+          var tab = $('table tbody td');
+
+          assert.equal(currentContact.firstName(),tab[0].innerHTML);
+          assert.equal(currentContact.lastName(),tab[1].innerHTML);
+
+          assert.equal(currentContact.phones()[0].number(),tab[2].innerText.split('/')[0].split('[')[0]);
+          assert.equal(currentContact.phones()[1].number(),tab[2].innerText.split('/')[1].split('[')[0]);
+
+          assert.equal(currentContact.mails()[0].address(),tab[3].innerText.split('/')[0].split('[')[0]);
+          assert.equal(currentContact.mails()[1].address(),tab[3].innerText.split('/')[1].split('[')[0]);
+
+          assert.equal(currentContact.tags(),tab[4].innerHTML);
+
       });
 
       QUnit.test("remove contact tests", function (assert) {
