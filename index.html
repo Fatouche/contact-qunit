@@ -110,7 +110,20 @@
       });
 
       QUnit.test("remove contact tests", function (assert) {
-        assert.ok(false);
+          var liste = Contact.Contacts.instance();
+          var currentContact;
+          var tab = $('table tbody td a');
+          tab[0].click();
+          var j = 0;
+          var nbContact = 0;
+          i=liste.iterator();
+
+          while(i.hasNext() != ""){
+              var currentContact = i.next();
+            nbContact = nbContact +1;
+          }
+
+          assert.equal(nbContact, 3);
       });
 
       QUnit.test("sort contact tests", function (assert) {
