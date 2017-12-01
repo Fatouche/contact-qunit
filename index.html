@@ -64,11 +64,28 @@
     <!-- BEGIN - Les tests -->
     <script>
       QUnit.test("header tests", function (assert) {
-        assert.ok(false);
+        var tab = $('table tbody tr th');
+        assert.equal(tab[0].innerHTML, "First name");
+        assert.equal(tab[1].innerHTML, "Last name");
+        assert.equal(tab[2].innerHTML, "Phones");
+        assert.equal(tab[3].innerHTML, "Mails");
+        assert.equal(tab[4].innerHTML, "Tags");
+        assert.equal(tab[5].innerHTML, "Actions");
       });
 
       QUnit.test("list tests", function (assert) {
-        assert.ok(false);
+        var liste = Contact.Contacts.instance();
+        var currentContact;
+        var tab = $('table tbody td');
+        var j = 0;
+        i=liste.iterator();
+        while(i.hasNext() != ""){
+            var currentContact = i.next();
+            assert.equal(currentContact.firstName(),tab[j].innerHTML);
+            j = j + 1;
+            assert.equal(currentContact.lastName(),tab[j].innerHTML);
+            j = j+5;
+        }
       });
 
       QUnit.test("first entry tests", function (assert) {
