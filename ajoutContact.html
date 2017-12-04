@@ -25,13 +25,23 @@
     <script src="src/controller.js"></script>
 
     <script>
+        var build = function () {
+            var model = new Contact.Model();
+            var view = new Contact.View(model);
+            var controller = new Contact.Controller(model, view);
+        };
+
         function myFunction() {
-            var fn = document.getElementById("firstName").value;
-            var ln = document.getElementById("lastName").value;
-            var mail = document.getElementById("mail").value;
+            var fn = $('#fistName').val();
+            var ln = $('#lastName').val();
+            var mail = $('#mail').val();
 
             var contact = new Contact.Builder().createContactWithProfessionalMail(Contact.Gender.MR, fn, ln, mail);
             Contact.Contacts.instance().add(contact);
+            console.log(fn);
+            console.log(ln);
+            console.log(mail);
+            build();
         }
     </script>
 
@@ -70,13 +80,16 @@
         </div>
 
         <div class="form-actions">
-            <button type="submit" class="btn btn-primary" onclick="myFunction()" >Submit</button>
+            <button type="button" class="btn btn-primary" onclick="javacript:myFunction()" >Submit</button>
             <button type="button" class="btn">Cancel</button>
         </div>
 
     </fieldset>
 </form>
 
+<div id="contacts">
+
+</div>
 
 </body>
 </html>
